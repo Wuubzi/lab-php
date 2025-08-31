@@ -1,0 +1,481 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.profile-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+}
+
+.back-section {
+    margin-bottom: 15px;
+}
+
+.back-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: #007bff;
+}
+
+.back-arrow {
+    font-size: 20px;
+}
+
+.title {
+    text-align: center;
+    color: #1976d2;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    font-weight: 300;
+}
+
+.logout-section {
+    text-align: right;
+    margin-bottom: 15px;
+}
+
+.logout-btn {
+    text-decoration: none;
+    background-color: #dc3545;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background-color: #b02a37;
+}
+
+/* Sección de foto */
+.photo-section {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.photo-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.photo-container:hover {
+    transform: scale(1.05);
+}
+
+.photo-container img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #e3f2fd;
+    box-shadow: 0 10px 30px rgba(33, 150, 243, 0.2);
+    transition: all 0.3s ease;
+}
+
+.photo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(33, 150, 243, 0.8);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: white;
+    font-size: 14px;
+}
+
+.photo-container:hover .photo-overlay {
+    opacity: 1;
+}
+
+.camera-icon {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.photo-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.photo-controls button {
+    display: none;
+}
+
+/* Editor de fotos */
+.photo-editor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.editor-content {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.editor-content h3 {
+    text-align: center;
+    color: #1976d2;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+#editCanvas {
+    width: 100%;
+    max-width: 300px;
+    height: 300px;
+    border: 2px solid #e3f2fd;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto 20px;
+}
+
+.editor-controls {
+    space-y: 15px;
+}
+
+.control-group {
+    margin-bottom: 15px;
+}
+
+.control-group label {
+    display: block;
+    color: #1976d2;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.control-group input[type="range"] {
+    width: 100%;
+    height: 8px;
+    border-radius: 5px;
+    background: #e3f2fd;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.control-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #2196f3;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(33, 150, 243, 0.3);
+}
+
+.control-group input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #2196f3;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 6px rgba(33, 150, 243, 0.3);
+}
+
+.editor-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Formulario */
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    color: #1976d2;
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid #e3f2fd;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: #fafafa;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #2196f3;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+.form-group input::placeholder {
+    color: #90a4ae;
+}
+
+/* Botones */
+.btn-primary,
+.btn-secondary,
+.btn-danger {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #2196f3, #1976d2);
+    color: white;
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #1976d2, #1565c0);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+}
+
+.btn-secondary {
+    background: #f5f5f5;
+    color: #666;
+    border: 1px solid #ddd;
+}
+
+.btn-secondary:hover {
+    background: #eeeeee;
+    transform: translateY(-1px);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+    color: white;
+    box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3);
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #d32f2f, #c62828);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(244, 67, 54, 0.4);
+}
+
+.form-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .profile-card {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    .title {
+        font-size: 2em;
+    }
+
+    .photo-container img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .form-buttons {
+        flex-direction: column;
+    }
+
+    .photo-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .editor-buttons {
+        flex-direction: column;
+    }
+
+    .editor-content {
+        padding: 20px;
+        margin: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-card {
+        border-radius: 15px;
+        padding: 15px;
+    }
+
+    .title {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+
+    .photo-container img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .form-group input,
+    .form-group select {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.profile-card {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.form-group {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.form-group:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.form-group:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.form-group:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.form-group:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.form-group:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+/* Estados de validación */
+.form-group input:valid {
+    border-color: #4caf50;
+}
+
+.form-group input:invalid:not(:focus):not(:placeholder-shown) {
+    border-color: #f44336;
+}
+
+/* Efectos de hover mejorados */
+.form-group input:hover,
+.form-group select:hover {
+    border-color: #64b5f6;
+}
+
+/* Scrollbar personalizado para el editor */
+.editor-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.editor-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.editor-content::-webkit-scrollbar-thumb {
+    background: #2196f3;
+    border-radius: 4px;
+}
+
+.editor-content::-webkit-scrollbar-thumb:hover {
+    background: #1976d2;
+}

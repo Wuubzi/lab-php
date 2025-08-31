@@ -1,0 +1,47 @@
+services:
+  app:
+    build: .
+    container_name: lab-php
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src:/var/www/html:delegated
+      - ./apache.conf:/etc/apache2/conf-available/z-mvc.conf
+    depends_on:
+      - db
+    command: >
+      bash -c "a2enmod rewrite &&
+               a2enconf z-mvc &&
+               apache2-foreground"
+
+  db:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: adsi
+      MYSQL_USER: mvc_user
+      MYSQL_PASSWORD: mvc_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: root
+      PMA_ARBITRARY: 1
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+
+volumes:
+  db_data:
