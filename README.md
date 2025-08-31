@@ -26,23 +26,13 @@ docker-compose --version
 
 ```bash
 # Clona el repositorio
-git clone https://github.com/tu-usuario/laboratorio-php.git
+git clone https://github.com/Wuubzi/lab-php.git
 
 # Navega al directorio del proyecto
-cd laboratorio-php
+cd lab-php
 ```
 
-### Paso 2: Configuración del Entorno
-
-```bash
-# Copia el archivo de configuración de ejemplo
-cp .env.example .env
-
-# Edita las variables de entorno según tus necesidades
-nano .env
-```
-
-### Paso 3: Construir y Ejecutar con Docker
+### Paso 2: Construir y Ejecutar con Docker
 
 ```bash
 # Construye y ejecuta todos los servicios en segundo plano
